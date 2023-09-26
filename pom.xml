@@ -120,9 +120,9 @@
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
-                <configuration>
-                    <failOnError>false</failOnError>
-                </configuration>
+<!--                <configuration>-->
+<!--                    <failOnError>false</failOnError>-->
+<!--                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
@@ -134,7 +134,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.22.2</version>
             <configuration>
-                <testFailureIgnore>true</testFailureIgnore>
+                <testFailureIgnore>false</testFailureIgnore>
                 <argLine>
                     -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                 </argLine>
