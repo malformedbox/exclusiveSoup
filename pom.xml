@@ -104,7 +104,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/test/resources/</directory>
+                <directory>src/main/resources/</directory>
             </resource>
         </resources>
         <plugins>
@@ -156,7 +156,7 @@
                     <allure.results.directory>target/allure-results</allure.results.directory>
                 </systemPropertyVariables>
                 <suiteXmlFiles>
-                    <suiteXmlFile>src\test\resources\testng\${suiteXmlFile}</suiteXmlFile>
+                    <suiteXmlFile>src\main\resources\testng\full\${suiteXmlFile}</suiteXmlFile>
                 </suiteXmlFiles>
             </configuration>
             <dependencies>

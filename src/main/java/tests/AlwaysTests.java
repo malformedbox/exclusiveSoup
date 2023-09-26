@@ -3,16 +3,19 @@ package tests;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BasicPages;
 
 /*
  * Basic tests
  */
 public class AlwaysTests {
+    BasicPages basicPages = new BasicPages();
     @Test
     @Feature("Pass")
     public void alwaysPass() {
         boolean alwaysTrue = true;
-        System.out.println("Condition is: " + alwaysTrue);
+        String message = "Condition is: " + alwaysTrue;
+        basicPages.printOutAssert(message);
         Assert.assertTrue(alwaysTrue);
     }
 
@@ -20,7 +23,8 @@ public class AlwaysTests {
     @Feature("Fail")
     public void alwaysFail() {
         boolean alwaysFalse = false;
-        System.out.println("Condition is: " + alwaysFalse);
+        String message = "Condition is: " + alwaysFalse;
+        basicPages.printOutAssert(message);
         Assert.assertTrue(alwaysFalse);
     }
 }

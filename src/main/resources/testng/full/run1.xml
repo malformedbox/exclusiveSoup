@@ -4,10 +4,10 @@
     <test name="Run Tests" parallel="methods" thread-count="5">
         <classes>
             <class name="tests.AlwaysTests">
-                <methods>
-                    <include name="alwaysPass"/>
-                    <include name="alwaysFail"/>
-                </methods>
+<!--                <methods>-->
+<!--                    <include name="alwaysPass"/>-->
+<!--                    <include name="alwaysFail"/>-->
+<!--                </methods>-->
             </class>
         </classes>
     </test>
