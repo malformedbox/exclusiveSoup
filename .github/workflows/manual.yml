@@ -56,12 +56,17 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history # Needed for history to show up
 
-      - uses: actions/checkout@v2
-      - name: Add Status Action
+      - name: Get current date
+        id: date
+        run: |
+          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+
+      - name: Post the link to the report
+        if: always()
         uses: Sibz/github-status-action@v1
         with: 
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          context: 'Test run'
-          description: 'Passed'
-          state: 'success'
-          sha: ${{github.event.pull_request.head.sha || github.sha}}
+            authToken: ${{secrets.GITHUB_TOKEN}}
+            context: 'Test report'
+            state: 'success'
+            sha: ${{ github.event.pull_request.head.sha }}
+            target_url: https://malformedbox.github.io/exclusiveSoup/${{ env.date }} /github-allure-history/
