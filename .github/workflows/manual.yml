@@ -56,10 +56,10 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history # Needed for history to show up
 
-      - name: Get current date
+      - name: Get current date in EST
         id: date
         run: |
-          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_ENV
 
       - name: Post the link to the report
         if: always()
