@@ -58,12 +58,10 @@ jobs:
 
       - name: Get current date
         id: date
-        uses: Kaven-Universe/github-action-current-date-time@v1
-        with:
-          format: "yyyy-MM-dd"
+        run: "$date=& Get-Date -format yyyy-mm-dd"
 
       - name: Echo date
-        run: echo "Date is ${{ steps.date }}"
+        run: echo "date=$date" >> $env:GITHUB_ENV
 
       - name: Post the link to the report
         if: always()
@@ -73,4 +71,4 @@ jobs:
             context: 'Test report'
             state: 'success'
             sha: ${{ github.event.pull_request.head.sha }}
-            target_url: malformedbox.github.io/exclusiveSoup/${{ steps.date }}/github-allure-history
+            target_url: malformedbox.github.io/exclusiveSoup/${{ env.date }}/github-allure-history
