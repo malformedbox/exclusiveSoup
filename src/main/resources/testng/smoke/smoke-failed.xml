@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Run Failed Smoke" data-provider-thread-count="1">
+    <test name="Re-run" parallel="methods" thread-count="1">
+        <classes>
+            <class name="tests.AlwaysTests">
+                <methods>
+                    <include name="alwaysPass"></include>
+                    <include name="alwaysFail"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

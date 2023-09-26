@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 /*
  * Basic tests
  */
-public class BasicTests {
+public class AlwaysTests {
     @Test
     @Feature("Pass")
     public void alwaysPass() {
