@@ -71,4 +71,4 @@ jobs:
             state: 'success'
             sha: ${{ github.event.pull_request.head.sha || github.sha }}
             # Must be in https scheme
-            target_url: https://malformedbox.github.io/exclusiveSoup/github-allure-history
+            target_url: https://malformedbox.github.io/exclusiveSoup
