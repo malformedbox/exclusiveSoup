@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /*
- * Basic tests
+ * Math tests
  */
 public class SimpleMath {
     @Test
