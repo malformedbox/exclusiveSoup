@@ -57,11 +57,10 @@ jobs:
     #       publish_dir: allure-history # Needed for history to show up
 
       - name: Get current date
-        id: date
-        run: "$date=& Get-Date -format yyyy-mm-dd"
-
-      - name: Echo date
-        run: echo "date=$date" >> $env:GITHUB_ENV
+        run: |
+          export TZ="America/New_York"
+          echo "Current Date: $(date +'%Y-%m-%d')"
+        id: current-date
 
       - name: Post the link to the report
         if: always()
@@ -71,4 +70,4 @@ jobs:
             context: 'Test report'
             state: 'success'
             sha: ${{ github.event.pull_request.head.sha }}
-            target_url: malformedbox.github.io/exclusiveSoup/${{ env.date }}/github-allure-history
+            target_url: malformedbox.github.io/exclusiveSoup/${{ steps.current-date.outputs.current-date }}/github-allure-history
