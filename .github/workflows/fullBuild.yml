@@ -34,8 +34,8 @@ jobs:
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        uses: actions/checkout@v2
         if: always()
+        uses: actions/checkout@v2
         continue-on-error: true
         with:
           ref: gh-pages
@@ -43,14 +43,15 @@ jobs:
 
       # This is needed to add history to the report
       - name: Build Report
-        uses: simple-elf/allure-report-action@master
         if: always()
+        uses: simple-elf/allure-report-action@master
         with:
           allure_results: target/allure-results
           allure_history: allure-history
           keep_reports: 10
 
       - name: Deploy to Github Pages
+        if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
@@ -58,6 +59,7 @@ jobs:
           publish_dir: allure-history # Needed for history to show up
 
       - name: Get current date
+        if: always()
         run: |
           export TZ="America/New_York"
           echo "Current Date: $(date +'%Y-%m-%d %H:%M:%S')"
