@@ -1,4 +1,4 @@
-name: Build and deploy Allure Report
+name: Full Build
 
 on:
   workflow_dispatch:
