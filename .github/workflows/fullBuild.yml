@@ -29,6 +29,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Generate Allure Report
+        if: always()
         run: mvn allure:report
 
       # This is needed to grab Allure history
