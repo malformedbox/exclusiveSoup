@@ -11,7 +11,7 @@
 [![<ORG_NAME>](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg)](<LINK>)
 
 # Example:
-[![CircleCI](https://github.com/malformedbox/exclusiveSoup/actions/workflows/fullBuild.yml/badge.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![CircleCI](https://github.com/malformedbox/exclusiveSoup/actions/workflows/fullBuild.yml/badge.svg?style=svg)](https://github.com/malformedbox/exclusiveSoup/actions/workflows/fullBuild.yml)
 [![AllureReports](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://github.com/malformedbox/exclusiveSoup/actions/workflows/fullBuild.yml)
 
 # Example for specific branch:
