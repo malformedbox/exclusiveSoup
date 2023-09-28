@@ -16,3 +16,5 @@
 
 # Example for specific branch:
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5)
+
+[![Integration Tests](https://github.com/exclusiveSoup/actions/workflows/fullbuild.yaml/badge.svg?branch=main)](https://github.com/exclusiveSoup/actions/workflows/fullbuild.yaml?query=branch%3Amain)
