@@ -50,20 +50,23 @@ jobs:
           allure_history: allure-history
           keep_reports: 10
 
+      - name: Get current date
+        if: always()
+        run: |
+          export TZ="America/New_York"
+          current_date=$(date +'%Y-%m-%d %H:%M:%S')
+          echo "Current Date: $current_date"
+          mkdir -p "$current_date"
+          cp -r allure-history/* "$current_date"
+        id: current-date
+
       - name: Deploy to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history # Needed for history to show up
-
-      - name: Get current date
-        if: always()
-        run: |
-          export TZ="America/New_York"
-          echo "Current Date: $(date +'%Y-%m-%d %H:%M:%S')"
-        id: current-date
+          publish_dir: "$current_date" # Needed for history to show up
 
       - name: Post the link to the report
         if: always()
