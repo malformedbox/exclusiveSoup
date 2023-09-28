@@ -67,7 +67,8 @@ jobs:
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ${{ steps.current-date.outputs.current_date }} # Needed for history to show up
+          publish_dir: allure-history
+          # publish_dir: ${{ steps.current-date.outputs.current_date }} # Needed for history to show up
 
       # - name: Post the link to the report
       #   if: always()
