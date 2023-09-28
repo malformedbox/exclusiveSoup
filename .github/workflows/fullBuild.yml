@@ -48,7 +48,7 @@ jobs:
         with:
           allure_results: target/allure-results
           allure_history: allure-history
-          keep_reports: 10
+          keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
 
       - name: Get current date
         if: always()
@@ -58,6 +58,7 @@ jobs:
           echo "Current Date: $current_date"
           mkdir -p "$current_date"
           cp -r allure-history/* "$current_date"
+        shell: bash
         id: current-date
 
       - name: Deploy to Github Pages
@@ -66,15 +67,15 @@ jobs:
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: "$current_date" # Needed for history to show up
+          publish_dir: ${{ steps.current-date.outputs.current_date }} # Needed for history to show up
 
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with: 
-            authToken: ${{secrets.GITHUB_TOKEN}}
-            context: 'Test report'
-            state: 'success'
-            sha: ${{ github.event.pull_request.head.sha || github.sha }}
-            # Must be in https scheme
-            target_url: https://malformedbox.github.io/exclusiveSoup
+      # - name: Post the link to the report
+      #   if: always()
+      #   uses: Sibz/github-status-action@v1
+      #   with: 
+      #       authToken: ${{secrets.GITHUB_TOKEN}}
+      #       context: 'Test report'
+      #       state: 'success'
+      #       sha: ${{ github.event.pull_request.head.sha || github.sha }}
+      #       # Must be in https scheme
+      #       target_url: https://malformedbox.github.io/exclusiveSoup
