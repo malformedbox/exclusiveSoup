@@ -54,7 +54,7 @@ jobs:
         if: always()
         run: |
           export TZ="America/New_York"
-          current_date=$(date +'%Y-%m-%d %H:%M:%S')
+          current_date=$(date +'%Y-%m-%d-%H:%M:%S')
           echo "Current Date: $current_date"
           mkdir -p "$current_date"
           cp -r allure-history/* "$current_date"
