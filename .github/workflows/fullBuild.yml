@@ -66,7 +66,7 @@ jobs:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           # publish_dir: allure-history
-          publish_dir: "$current_date"
+          publish_dir: allure-history
           
       # - name: Post the link to the report
       #   if: always()
