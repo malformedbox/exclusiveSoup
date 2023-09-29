@@ -56,8 +56,8 @@ jobs:
           export TZ="America/New_York"
           current_date=$(date +'%Y-%m-%d-%H:%M:%S')
           echo "Current Date: $current_date"
-          mkdir -p "$current_date"
-          cp -r allure-history/* "$current_date"
+          mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
+          cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
 
       - name: Deploy to Github Pages
         if: always()
