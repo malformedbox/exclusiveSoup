@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Oct 31 22:23:04 GMT 2023","Tue Oct 31 22:23:04 GMT 2023","0","Run Suite (0)","Run Tests","tests.SimpleMath","tests.SimpleMath","addition","addition",""
+"passed","Tue Oct 31 22:23:04 GMT 2023","Tue Oct 31 22:23:04 GMT 2023","32","Run Suite","Run Tests","tests.AlwaysTests","tests.AlwaysTests","alwaysFail","alwaysFail",""
+"passed","Tue Oct 31 22:23:04 GMT 2023","Tue Oct 31 22:23:04 GMT 2023","47","Run Suite","Run Tests","tests.AlwaysTests","tests.AlwaysTests","alwaysPass","alwaysPass",""
+"passed","Tue Oct 31 22:23:04 GMT 2023","Tue Oct 31 22:23:04 GMT 2023","0","Run Suite (0)","Run Tests","tests.SimpleMath","tests.SimpleMath","subtraction","subtraction",""
