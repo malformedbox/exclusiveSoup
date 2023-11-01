@@ -1,13 +1,5 @@
-# - name: Get current date
-#   if: always()
-#   run: |
-#     export TZ="America/New_York"
-#     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
-#     echo "Current Date: $current_date"
-#     # mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
-
-name: Test other folder
-run-name: Test other folder $(date +'%Y-%m-%d-% H:%M:%S')
+name: Test other folder ${{ steps.date.outputs.date }}
+# run-name: Test other folder ${{ github.event.head_commit.timestamp }}
 
 on:
   workflow_dispatch:
@@ -17,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set workflow name to include date
+        id: date
+        run: echo "::set-output name=date::$(date + '%m/%d/%y %H:%M:%s')"
+      - name: Print workflow name
+        run: echo "This workflow is named ${{ github.workflow }} and its run name is ${{ github.run_name }}"
+            
       - name: Checkout code
         uses: actions/checkout@v2
 
