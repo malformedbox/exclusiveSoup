@@ -78,4 +78,4 @@ jobs:
             state: 'success'
             sha: ${{ github.event.pull_request.head.sha || github.sha }}
             # Must be in https scheme
-            target_url: https://malformedbox.github.io/exclusiveSoup/${{ github.run_number}}
+            target_url: https://malformedbox.github.io/exclusiveSoup/workflow1/${{ github.run_number}}
