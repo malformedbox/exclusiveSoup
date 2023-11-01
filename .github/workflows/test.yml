@@ -1,5 +1,5 @@
-name: Test other folder ${{ github.run_number}} ::set-env name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')
-run-name: Test other folder - ::set-env name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')
+name: Test other folder
+run-name: Test other folder - ${{ env.NOW }}
 
 on:
   workflow_dispatch:
