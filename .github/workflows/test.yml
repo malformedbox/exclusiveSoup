@@ -1,4 +1,4 @@
-name: Test other folder ${{ github.event.head_commit.timestamp }}
+name: Test other folder
 run-name: Test other folder ${{ github.event.head_commit.timestamp }}
 
 on:
