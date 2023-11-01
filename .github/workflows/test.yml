@@ -1,4 +1,13 @@
-name: Test other folder
+# - name: Get current date
+#   if: always()
+#   run: |
+#     export TZ="America/New_York"
+#     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
+#     echo "Current Date: $current_date"
+#     # mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
+
+# name: Test other folder
+run-name: Test other folder $(date +'%Y-%m-%d-% H:%M:%S')
 
 on:
   workflow_dispatch:
@@ -51,14 +60,14 @@ jobs:
           subfolder: workflow1
           keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
 
-      - name: Get current date
-        if: always()
-        run: |
-          export TZ="America/New_York"
-          current_date=$(date +'%Y-%m-%d-%H:%M:%S')
-          echo "Current Date: $current_date"
-          mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
-          cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
+      # - name: Get current date
+      #   if: always()
+      #   run: |
+      #     export TZ="America/New_York"
+      #     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
+      #     echo "Current Date: $current_date"
+      #     mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
+      #     cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
 
       - name: Deploy to Github Pages
         if: always()
