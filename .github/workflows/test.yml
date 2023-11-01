@@ -1,5 +1,5 @@
 name: Test other folder
-run-name: Test other folder ${{ github.event.head_commit.timestamp }}
+run-name: Test other folder - $${{ github.run_number}}
 
 on:
   workflow_dispatch:
