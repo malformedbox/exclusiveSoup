@@ -1,6 +1,5 @@
 name: Test other folder
-# run-name: Test other folder ${{ github.event.head_commit.timestamp }}
-run-name: Test other folder ${{ steps.date.outputs.date }}
+run-name: Test other folder ${{ github.event.head_commit.timestamp }}
 
 on:
   workflow_dispatch:
@@ -8,7 +7,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    # run-name: Test other folder ${{ steps.date.outputs.date }}
+    
     steps:
       - name: Set workflow name to include date
         id: date
