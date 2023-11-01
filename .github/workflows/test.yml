@@ -8,7 +8,7 @@ env:
 
 jobs:
   build-and-deploy:
-    name: Test other folder - ${{ env.DAY_OF_WEEK }}!
+    name: Test other folder - ${{ DAY_OF_WEEK }}!
     runs-on: ubuntu-latest
       
     steps:
