@@ -1,5 +1,8 @@
 name: Test other folder
-run-name: Test other folder - ${{ github.env.NOW }}
+env:
+  DAY_OF_WEEK: Monday
+  
+run-name: "Test other folder - $DAY_OF_WEEK!"
 
 on:
   workflow_dispatch:
