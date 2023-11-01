@@ -2,15 +2,13 @@ name: Test other folder
 env:
   DAY_OF_WEEK: Monday
   
-run-name: "Test other folder - ${{ env.DAY_OF_WEEK }}!"
-
 on:
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # run-name: Test other folder ${{ steps.date.outputs.date }}
+    name: "Test other folder - ${{ env.DAY_OF_WEEK }}!"
     
     steps:
       - name: Set workflow name to include date
