@@ -49,17 +49,17 @@ jobs:
           allure_results: target/allure-results
           allure_history: allure-history
           #possibly cannot incorporate a capital letter, so anotherOne did not work, numbers work
-          subfolder: anotherone
+          subfolder: anotherOne
           keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
 
-      - name: Get current date
-        if: always()
-        run: |
-          export TZ="America/New_York"
-          current_date=$(date +'%Y-%m-%d-%H:%M:%S')
-          echo "Current Date: $current_date"
-          mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
-          cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
+      # - name: Get current date
+      #   if: always()
+      #   run: |
+      #     export TZ="America/New_York"
+      #     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
+      #     echo "Current Date: $current_date"
+      #     mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
+      #     cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
 
       - name: Deploy to Github Pages
         if: always()
@@ -79,4 +79,4 @@ jobs:
             state: 'success'
             sha: ${{ github.event.pull_request.head.sha || github.sha }}
             # Must be in https scheme
-            target_url: https://malformedbox.github.io/exclusiveSoup/fullbuild/${{ github.run_number}}
+            target_url: https://malformedbox.github.io/exclusiveSoup/anotherone/${{ github.run_number}}
