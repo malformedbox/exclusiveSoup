@@ -1,5 +1,5 @@
 name: Test other folder
-run-name: Test other folder - ${{ env.NOW }}
+run-name: Test other folder - ${{ github.env.NOW }}
 
 on:
   workflow_dispatch:
