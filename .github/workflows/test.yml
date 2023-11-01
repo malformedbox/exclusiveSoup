@@ -6,7 +6,7 @@ on:
 env:
   DAY_OF_WEEK: ${{ 'Monday!' }}
 
-run-name: Test other folder - $DAY_OF_WEEK
+run-name: Test other folder - ${{ DAY_OF_WEEK }}
 
 jobs:
   build-and-deploy:
