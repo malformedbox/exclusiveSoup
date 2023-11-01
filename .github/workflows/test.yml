@@ -6,9 +6,10 @@ on:
 env:
   DAY_OF_WEEK: ${{ 'Monday!' }}
 
+run-name: Test other folder - $DAY_OF_WEEK
+
 jobs:
   build-and-deploy:
-    name: Test other folder - $DAY_OF_WEEK
     runs-on: ubuntu-latest
       
     steps:
