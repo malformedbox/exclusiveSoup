@@ -6,7 +6,7 @@
 #     echo "Current Date: $current_date"
 #     # mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
 
-# name: Test other folder
+name: Test other folder
 run-name: Test other folder $(date +'%Y-%m-%d-% H:%M:%S')
 
 on:
