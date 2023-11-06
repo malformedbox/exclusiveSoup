@@ -2,6 +2,13 @@ name: Full Build
 
 on:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      triggeringComment:
+        required: false
+        default: stable
+        type: string
+        
   pull_request:
     branches:
       - main
