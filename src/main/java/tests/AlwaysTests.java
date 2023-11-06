@@ -22,7 +22,7 @@ public class AlwaysTests {
     @Test
     @Feature("Fail")
     public void alwaysFail() {
-        boolean alwaysFalse = true;
+        boolean alwaysFalse = false;
         String message = "Condition is: " + alwaysFalse;
         basicPages.printOutAssert(message);
         Assert.assertTrue(alwaysFalse);
