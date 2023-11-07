@@ -21,8 +21,8 @@ jobs:
       
     steps:          
       - name: Print the tag to STDOUT
-        if: ${{ inputs.print_options }}
-        run: echo The tags are ${{ inputs.options }}
+        if: contains(['alwaysPass', 'addition'], inputs.testName)
+        run: echo The tags are ${{ inputs.testName }}
     
       - name: Checkout code
         uses: actions/checkout@v2
