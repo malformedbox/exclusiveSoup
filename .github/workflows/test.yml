@@ -21,7 +21,7 @@ jobs:
       
     steps:          
       - name: Print the tag to STDOUT
-        if: inputs.testName == 'alwaysPass'
+        # if: inputs.testName == 'alwaysPass'
         run: echo The tags are ${{ inputs.testName }}
     
       - name: Checkout code
