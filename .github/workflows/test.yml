@@ -3,18 +3,27 @@ run-name: Test other folder - ${{ github.run_number}}
   
 on:
   workflow_dispatch:
-
+    inputs:
+      testName:
+        description: 'Test Names to Run'
+        required: true
+        default: 'alwaysPass'
+        type: choice
+        options:
+          - alwaysPass
+          - alwaysFail
+          - addition
+          - subtraction
+        
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
       
-    steps:
-      - name: Set workflow name to include date
-        id: date
-        run: echo "::set-output name=date::$(date + '%m/%d/%y %H:%M:%s')"
-      - name: Print workflow name
-        run: echo "This workflow is named ${{ github.workflow }} and its run name is ${{ github.run_name }}"
-            
+    steps:          
+      - name: Print the tag to STDOUT
+        if: ${{ inputs.print_options }}
+        run: echo The tags are ${{ inputs.options }}
+    
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -57,16 +66,7 @@ jobs:
           allure_history: allure-history
           subfolder: workflow1
           keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
-
-      # - name: Get current date
-      #   if: always()
-      #   run: |
-      #     export TZ="America/New_York"
-      #     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
-      #     echo "Current Date: $current_date"
-      #     mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
-      #     cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
-
+          
       - name: Deploy to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
