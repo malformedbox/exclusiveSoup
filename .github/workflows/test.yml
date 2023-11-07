@@ -24,22 +24,13 @@ on:
       #     - addition
       #     - subtraction
 
-run-name: Test other folder - ${{ github.run_number}}
+run-name: Test other folder - ${{ github.run_number}} - ${{ inputs }}
         
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
       
-    steps:          
-      - name: Print the selected options
-        # if: inputs.testName == 'alwaysPass'
-        run: |
-          for input in alwaysPass alwaysFail addiiton subtraction; do
-            if [ ${{ inputs[input] }} == true ]; then
-              echo "$input was selected."
-            fi
-          done
-    
+    steps:             
       - name: Checkout code
         uses: actions/checkout@v2
 
