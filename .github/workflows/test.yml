@@ -1,5 +1,4 @@
 name: Test other folder
-run-name: Test other folder - ${{ github.run_number}}
   
 on:
   workflow_dispatch:
@@ -14,6 +13,8 @@ on:
           - alwaysFail
           - addition
           - subtraction
+
+run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.testName }}
         
 jobs:
   build-and-deploy:
