@@ -24,7 +24,7 @@ on:
       #     - addition
       #     - subtraction
 
-run-name: Test other folder - ${{ github.run_number}} - ${{ inputs }}
+run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
 jobs:
   build-and-deploy:
