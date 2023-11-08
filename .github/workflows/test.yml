@@ -37,7 +37,7 @@ jobs:
       - name: Modify XML file
         run: |
           if [ "${{ github.event.inputs.alwaysPass }}" == "true" ]; then
-            sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' tests.xml
+            sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/fullSuite.xml
           fi
 
       - name: Cache Maven dependencies
