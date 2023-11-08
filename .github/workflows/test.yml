@@ -10,6 +10,11 @@ on:
         type: string # Set the input type as a string
       alwaysFail:
         description: 'Always Fail'
+        required: false
+        default: 'false'
+        type: string
+      addition:
+        description: 'Addition'
         required: true
         default: 'false'
         type: string
@@ -24,16 +29,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Modify XML file
-      #   run: |
-      #     if [ "${{ github.event.inputs.alwaysPass }}" == "true" ]; then
-      #       sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/main/resources/testng/full/fullSuite.xml
-      #     fi
-
       - name: Modify XML file
         run: |
           # Define an array of input options
-          input_options=("alwaysPass" "alwaysFail")
+          input_options=("alwaysPass" "alwaysFail" "addition")
         
           # Loop through the input options and modify tests.xml accordingly
           for option in "${input_options[@]}"; do
