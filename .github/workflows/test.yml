@@ -30,9 +30,15 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
       
-    steps:             
+    steps:  
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Modify XML file
+        run: |
+          if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+            sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' tests.xml
+          fi
 
       - name: Cache Maven dependencies
         uses: actions/cache@v3
