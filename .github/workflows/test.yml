@@ -6,8 +6,8 @@ on:
       alwaysPass:
         description: 'Always Pass'
         required: true
-        default: false
-        type: boolean
+        default: 'false' # Use 'false' as a string
+        type: string # Set the input type as a string
       alwaysFail:
         description: 'Always Fail'
         required: true
@@ -36,7 +36,7 @@ jobs:
 
       - name: Modify XML file
         run: |
-          if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+          if [ "${{ github.event.inputs.alwaysPass }}" == "true" ]; then
             sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' tests.xml
           fi
 
