@@ -33,7 +33,7 @@ jobs:
       - name: Modify XML file
         run: |
           # Define an array of input options
-          input_options=("alwaysPass" "alwaysFail" "otherOption1" "otherOption2")
+          input_options=("alwaysPass" "alwaysFail")
         
           # Loop through the input options and modify tests.xml accordingly
           for option in "${input_options[@]}"; do
