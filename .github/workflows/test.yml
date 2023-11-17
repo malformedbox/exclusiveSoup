@@ -33,7 +33,7 @@ jobs:
         run: |
           # Define an array of input options
           input_options=("alwaysPass" "alwaysFail" "addition")
-        
+          
           # Loop through the input options and modify tests.xml accordingly
           for option in "${input_options[@]}"; do
             if [ "${{ github.event.inputs[option] }}" = "true" ]; then
