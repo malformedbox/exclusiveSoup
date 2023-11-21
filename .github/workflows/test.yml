@@ -31,7 +31,6 @@ jobs:
 
       - name: Modify XML file
         run: |        
-          # Define an array of input options
           input_options=("alwaysPass" "alwaysFail" "addition")
         
           # Loop through the input options and modify tests.xml accordingly
