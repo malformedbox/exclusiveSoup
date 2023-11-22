@@ -21,8 +21,8 @@ on:
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
 
-env:
-  TEST_INPUTS: ${{ github.event.inputs }}
+# env:
+#   TEST_INPUTS: ${{ github.event.inputs }}
         
 jobs:
   build-and-deploy:
@@ -36,6 +36,7 @@ jobs:
         run: |        
           - name: Modify XML file
           if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+            # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/tests.xml
             echo "Running ${{ github.event.inputs.alwaysPass }}" 
       
             if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
