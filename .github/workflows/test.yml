@@ -20,9 +20,6 @@ on:
         type: string
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
-
-env:
-  TEST_INPUTS: ${{ github.event.inputs }}
         
 jobs:
   build-and-deploy:
