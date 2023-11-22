@@ -32,18 +32,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Modify XML file
-      #   run: |        
-      #       if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
-      #         # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/tests.xml
-      #         echo "Running ${{ github.event.inputs.alwaysPass }}" 
+      - name: Modify XML file
+        run: |        
+            if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+              # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/tests.xml
+              echo "Running ${{ github.event.inputs.alwaysPass }}" 
         
-      #         if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
-      #           # sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/full/tests.xml
-      #           echo "Running ${{ github.event.inputs.alwaysFail }}" 
-      #         fi
-      #       fi
-      #   shell: bash
+              if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
+                # sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/full/tests.xml
+                echo "Running ${{ github.event.inputs.alwaysFail }}" 
+              fi
+            fi
+        shell: bash
 
       # - name: Cache Maven dependencies
       #   uses: actions/cache@v3
@@ -101,6 +101,6 @@ jobs:
       #       authToken: ${{secrets.GITHUB_TOKEN}}
       #       context: 'Test report'
       #       state: 'success'
-            sha: ${{ github.event.pull_request.head.sha || github.sha }}
-            # Must be in https scheme and must match the subfolder's value in Build Report step
-            target_url: https://malformedbox.github.io/exclusiveSoup/workflow1/${{ github.run_number}}
+      # sha: ${{ github.event.pull_request.head.sha || github.sha }}
+      # # Must be in https scheme and must match the subfolder's value in Build Report step
+      # target_url: https://malformedbox.github.io/exclusiveSoup/workflow1/${{ github.run_number}}
