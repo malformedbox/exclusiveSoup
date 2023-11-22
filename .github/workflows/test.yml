@@ -43,7 +43,6 @@ jobs:
                 echo "Running ${{ github.event.inputs.alwaysFail }}" 
               fi
             fi
-            echo "The log level is $TEST_INPUTS" 
         shell: bash
 
       # - name: Cache Maven dependencies
