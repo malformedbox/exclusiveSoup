@@ -2,6 +2,16 @@ name: Full Build
 
 on:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      triggeringComment:
+        required: false
+        default: stable
+        type: string
+        
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
@@ -48,18 +58,18 @@ jobs:
         with:
           allure_results: target/allure-results
           allure_history: allure-history
+          #possibly cannot incorporate a capital letter, so anotherOne did not work, numbers work
+          subfolder: anotherOne
           keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
 
-      - name: Get current date
-        if: always()
-        run: |
-          export TZ="America/New_York"
-          current_date=$(date +'%Y-%m-%d %H:%M:%S')
-          echo "Current Date: $current_date"
-          mkdir -p "$current_date"
-          cp -r allure-history/* "$current_date"
-        shell: bash
-        id: current-date
+      # - name: Get current date
+      #   if: always()
+      #   run: |
+      #     export TZ="America/New_York"
+      #     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
+      #     echo "Current Date: $current_date"
+      #     mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
+      #     cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
 
       - name: Deploy to Github Pages
         if: always()
@@ -67,15 +77,16 @@ jobs:
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ${{ steps.current-date.outputs.current_date }} # Needed for history to show up
-
-      # - name: Post the link to the report
-      #   if: always()
-      #   uses: Sibz/github-status-action@v1
-      #   with: 
-      #       authToken: ${{secrets.GITHUB_TOKEN}}
-      #       context: 'Test report'
-      #       state: 'success'
-      #       sha: ${{ github.event.pull_request.head.sha || github.sha }}
-      #       # Must be in https scheme
-      #       target_url: https://malformedbox.github.io/exclusiveSoup
+          # publish_dir: allure-history
+          publish_dir: allure-history
+          
+      - name: Post the link to the report
+        if: always()
+        uses: Sibz/github-status-action@v1
+        with: 
+            authToken: ${{secrets.GITHUB_TOKEN}}
+            context: 'Test report'
+            state: 'success'
+            sha: ${{ github.event.pull_request.head.sha || github.sha }}
+            # Must be in https scheme
+            target_url: https://malformedbox.github.io/exclusiveSoup/anotherOne/${{ github.run_number}}

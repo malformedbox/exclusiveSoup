@@ -1,0 +1,44 @@
+name: Workflow with inputs
+  
+on:
+  workflow_dispatch:
+    inputs:
+      alwaysPass:
+        description: 'Always Pass'
+        required: true
+        default: 'false' # Use 'false' as a string
+        type: string # Set the input type as a string
+      alwaysFail:
+        description: 'Always Fail'
+        required: false
+        default: 'false'
+        type: string
+      addition:
+        description: 'Addition'
+        required: true
+        default: 'false'
+        type: string
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Modify XML file
+        run: |        
+          if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+          # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/tests.xml
+          echo "Running ${{ github.event.inputs.alwaysPass }}" 
+          # alwaysFail depends on alwaysPass
+            if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
+            # sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/full/tests.xml
+            echo "Running ${{ github.event.inputs.alwaysFail }}" 
+            fi
+          fi
+        shell: bash
+        
+      - name: Archive modified XML
+        uses: actions/upload-artifact@v2
+        with:
+          name: Full Suite XML
+          # The file's name is case sensitive
+          path: src/resources/testng/full/fullSuite.xml
