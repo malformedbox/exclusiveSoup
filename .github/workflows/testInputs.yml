@@ -39,5 +39,6 @@ jobs:
       - name: Archive modified XML
         uses: actions/upload-artifact@v2
         with:
-          name: modified-xml
-          path: src/resources/testng/full/fullsuite.xml
+          name: Full Suite XML
+          # The file's name is case sensitive
+          path: src/resources/testng/full/fullSuite.xml
