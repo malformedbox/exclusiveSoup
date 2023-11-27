@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: modified-xml
-          path: src/resources/full/tests.xml
+          path: src/resources/testng/full/fullsuite.xml
