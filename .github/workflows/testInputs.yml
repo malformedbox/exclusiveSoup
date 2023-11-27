@@ -45,5 +45,6 @@ jobs:
 
       - name: Debugging
         run: |
-          ls -R src
-          find src -name "fullSuite.xml"
+          pwd
+          ls -R
+
