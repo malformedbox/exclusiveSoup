@@ -23,6 +23,7 @@ jobs:
   run-all-steps:
     runs-on: ubuntu-latest
     steps:
+      # Necessary first step, otherwise paths and code won't be found
       - name: Checkout code
         uses: actions/checkout@v2
     
@@ -45,8 +46,3 @@ jobs:
           name: Full Suite XML
           # The file's name is case sensitive
           path: src/resources/testng/full/fullSuite.xml
-
-      - name: Print working directory
-        run: |
-          pwd
-
