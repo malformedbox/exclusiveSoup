@@ -41,4 +41,4 @@ jobs:
         with:
           name: Full Suite XML
           # The file's name is case sensitive
-          path: src/resources/testng/full
+          path: src/resources/testng/full/fullSuite.xml
