@@ -1,10 +1,10 @@
 name: Test other folder
   
 on:
-  # workflow_run:
-  #   workflows: ["Workflow with inputs"]
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows: ["Workflow with inputs"]
+    types:
+      - completed
   workflow_dispatch:
     inputs:
       alwaysPass:
