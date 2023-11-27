@@ -23,6 +23,9 @@ jobs:
   run-all-steps:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
       - name: Modify XML file
         run: |        
           if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
@@ -41,7 +44,7 @@ jobs:
         with:
           name: Full Suite XML
           # The file's name is case sensitive
-          path: src/resources/full/tests.xml
+          path: src/resources/testng/full/tests.xml
 
       - name: Print working directory
         run: |
