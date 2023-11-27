@@ -42,3 +42,8 @@ jobs:
           name: Full Suite XML
           # The file's name is case sensitive
           path: src/resources/testng/full/fullSuite.xml
+
+      - name: Print working directory
+        run: |
+          pwd
+
