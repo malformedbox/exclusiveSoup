@@ -37,8 +37,8 @@ jobs:
       - name: Download modified XML
         uses: actions/download-artifact@v2
         with:
-          name: full.xml
-          path: src/resources/full/
+          name: Full Suite XML
+          path: src/resources/full/fullSuite.xml
 
       # - name: Modify XML file
       #   run: |        
