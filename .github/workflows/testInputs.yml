@@ -20,7 +20,7 @@ on:
         type: string
 
 jobs:
-  job1:
+  run-all-steps:
     runs-on: ubuntu-latest
     steps:
       - name: Modify XML file
