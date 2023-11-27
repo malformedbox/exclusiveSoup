@@ -30,7 +30,6 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:  
-      # The passed XML is only modified in the input workflow, there is not an actual change or commit on the XML
       - name: Download modified XML
         uses: actions/download-artifact@v2
         with:
