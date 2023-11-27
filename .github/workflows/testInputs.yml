@@ -26,11 +26,11 @@ jobs:
       - name: Modify XML file
         run: |        
           if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
-          # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/fullSuite.xml
+          # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' exclusiveSoup/src/main/resources/testng/full/fullSuite.xml
           echo "Running ${{ github.event.inputs.alwaysPass }}" 
           # alwaysFail depends on alwaysPass
             if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
-            # sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/full/fullSuite.xml
+            # sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' exclusiveSoup/src/main/resources/testng/full/fullSuite.xml
             echo "Running ${{ github.event.inputs.alwaysFail }}" 
             fi
           fi
@@ -41,10 +41,4 @@ jobs:
         with:
           name: Full Suite XML
           # The file's name is case sensitive
-          path: src/resources/testng/full/fullSuite.xml
-
-      - name: Debugging
-        run: |
-          pwd
-          ls -R
-
+          path: exclusiveSoup/src/main/resources/testng/full/fullSuite.xml
