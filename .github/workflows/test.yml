@@ -30,15 +30,15 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:  
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       # The passed XML is only modified in the input workflow, there is not an actual change/commit on the XML
       - name: Download modified XML
         uses: actions/download-artifact@v2
         with:
           name: full.xml
           path: src/resources/full/
-    
-      - name: Checkout code
-        uses: actions/checkout@v2
 
       # - name: Modify XML file
       #   run: |        
