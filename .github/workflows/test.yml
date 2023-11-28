@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Full Suite XML
-          path: src/resources/testng/full/fullSuite.xml
+          path: src/resources/testng/full
 
       # - name: Modify XML file
       #   run: |        
