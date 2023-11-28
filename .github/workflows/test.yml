@@ -40,6 +40,9 @@ jobs:
           name: Full Suite XML
           path: src/resources/testng/full/fullSuite.xml
 
+      - name: List downloaded contents
+        run: ls -R src/resources/testng/full
+
       # - name: Modify XML file
       #   run: |        
       #       if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
