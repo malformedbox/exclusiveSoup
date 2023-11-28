@@ -5,23 +5,23 @@ on:
     workflows: ["Workflow with inputs"]
     types:
       - completed
-  workflow_dispatch:
-    inputs:
-      alwaysPass:
-        description: 'Always Pass'
-        required: true
-        default: 'false' # Use 'false' as a string
-        type: string # Set the input type as a string
-      alwaysFail:
-        description: 'Always Fail'
-        required: false
-        default: 'false'
-        type: string
-      addition:
-        description: 'Addition'
-        required: true
-        default: 'false'
-        type: string
+  # workflow_dispatch:
+  #   inputs:
+  #     alwaysPass:
+  #       description: 'Always Pass'
+  #       required: true
+  #       default: 'false' # Use 'false' as a string
+  #       type: string # Set the input type as a string
+  #     alwaysFail:
+  #       description: 'Always Fail'
+  #       required: false
+  #       default: 'false'
+  #       type: string
+  #     addition:
+  #       description: 'Addition'
+  #       required: true
+  #       default: 'false'
+  #       type: string
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Full Suite XML
-          path: src/resources/testng/full
+          path: src/resources/testng/full/fullSuite.xml
 
       # - name: Modify XML file
       #   run: |        
