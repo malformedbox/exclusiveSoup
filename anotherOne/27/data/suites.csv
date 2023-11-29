@@ -1,5 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Mon Nov 06 17:05:00 GMT 2023","Mon Nov 06 17:05:00 GMT 2023","71","Run Suite","Run Tests","tests.AlwaysTests","tests.AlwaysTests","alwaysFail","alwaysFail",""
-"passed","Mon Nov 06 17:05:00 GMT 2023","Mon Nov 06 17:05:00 GMT 2023","33","Run Suite","Run Tests","tests.AlwaysTests","tests.AlwaysTests","alwaysPass","alwaysPass",""
-"passed","Mon Nov 06 17:05:00 GMT 2023","Mon Nov 06 17:05:00 GMT 2023","0","Run Suite (0)","Run Tests","tests.SimpleMath","tests.SimpleMath","subtraction","subtraction",""
-"passed","Mon Nov 06 17:05:00 GMT 2023","Mon Nov 06 17:05:00 GMT 2023","0","Run Suite (0)","Run Tests","tests.SimpleMath","tests.SimpleMath","addition","addition",""
