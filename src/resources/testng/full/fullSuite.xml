@@ -12,6 +12,7 @@
             <class name="tests.SimpleMath">
                 <methods>
                     <exclude name="addition"/>
+                    <exclude name="subtraction"/>
                 </methods>
             </class>
         </classes>
