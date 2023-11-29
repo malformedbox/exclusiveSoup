@@ -5,23 +5,23 @@ on:
     workflows: ["Workflow with inputs"]
     types:
       - completed
-  # workflow_dispatch:
-  #   inputs:
-  #     alwaysPass:
-  #       description: 'Always Pass'
-  #       required: true
-  #       default: 'false' # Use 'false' as a string
-  #       type: string # Set the input type as a string
-  #     alwaysFail:
-  #       description: 'Always Fail'
-  #       required: false
-  #       default: 'false'
-  #       type: string
-  #     addition:
-  #       description: 'Addition'
-  #       required: true
-  #       default: 'false'
-  #       type: string
+  workflow_dispatch:
+    inputs:
+      alwaysPass:
+        description: 'Always Pass'
+        required: true
+        default: 'false' # Use 'false' as a string
+        type: string # Set the input type as a string
+      alwaysFail:
+        description: 'Always Fail'
+        required: false
+        default: 'false'
+        type: string
+      addition:
+        description: 'Addition'
+        required: true
+        default: 'false'
+        type: string
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
@@ -33,28 +33,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      # The passed XML is only modified in the input workflow, there is not an actual change/commit on the XML
-      - name: Download modified XML
-        uses: actions/download-artifact@v2
-        with:
-          name: Full Suite XML
-          path: src/resources/testng/full/fullSuite.xml
+      # # The passed XML is only modified in the input workflow, there is not an actual change/commit on the XML
+      # - name: Download modified XML
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: Full Suite XML
+      #     path: src/resources/testng/full/fullSuite.xml
 
-      - name: List downloaded contents
-        run: ls -R src/resources/testng/full
+      # - name: List downloaded contents
+      #   run: ls -R src/resources/testng/full
 
-      # - name: Modify XML file
-      #   run: |        
-      #       if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
-      #         # sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/tests.xml
-      #         echo "Running ${{ github.event.inputs.alwaysPass }}" 
+      - name: Modify XML file
+        run: |        
+            if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+              sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/full/tests.xml
+              echo "Running ${{ github.event.inputs.alwaysPass }}" 
         
-      #         if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
-      #           # sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/full/tests.xml
-      #           echo "Running ${{ github.event.inputs.alwaysFail }}" 
-      #         fi
-      #       fi
-      #   shell: bash
+              if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
+                sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/full/tests.xml
+                echo "Running ${{ github.event.inputs.alwaysFail }}" 
+              fi
+            fi
+            if [ "${{ github.event.inputs.addition }}" = "true" ]; then
+                sed -i 's/exclude name="addition"/include name="addition"/g' src/resources/full/tests.xml
+                echo "Running ${{ github.event.inputs.addition }}" 
+            fi
+        shell: bash
 
       - name: Cache Maven dependencies
         uses: actions/cache@v3
