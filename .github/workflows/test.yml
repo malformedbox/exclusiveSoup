@@ -88,7 +88,8 @@ jobs:
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        if: needs['Generate Allure Report'].outputs.status == 'success'
+        # if: needs['Generate Allure Report'].outputs.status == 'success'
+        if: success()
         uses: actions/checkout@v2
         continue-on-error: true
         with:
