@@ -102,6 +102,7 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>src/java</sourceDirectory>
         <resources>
             <resource>
                 <directory>src/resources/</directory>
