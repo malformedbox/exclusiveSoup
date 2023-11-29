@@ -9,6 +9,11 @@
                     <exclude name="alwaysFail"/>
                 </methods>
             </class>
+            <class name="tests.SimpleMath">
+                <methods>
+                    <exclude name="addition"/>
+                </methods>
+            </class>
         </classes>
     </test>
                         
