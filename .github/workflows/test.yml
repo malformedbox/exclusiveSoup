@@ -54,6 +54,7 @@ jobs:
                 echo "Running ${{ github.event.inputs.alwaysFail }}" 
               fi
             fi
+            
             if [ "${{ github.event.inputs.addition }}" = "true" ]; then
                 sed -i 's/exclude name="addition"/include name="addition"/g' src/resources/testng/full/fullSuite.xml
                 echo "Running ${{ github.event.inputs.addition }}" 
