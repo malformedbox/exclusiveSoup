@@ -3,7 +3,7 @@
 <suite name="Run Suite" data-provider-thread-count="1">
     <test name="Run Tests" parallel="methods" thread-count="5">
         <classes>
-            <class name="tests.SimpleMath">
+            <class name="tests.delete.SimpleMath">
 <!--                <methods>-->
 <!--                    <include name="addition"/>-->
 <!--                    <include name="subtraction"/>-->

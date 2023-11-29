@@ -3,13 +3,13 @@
 <suite name="Run Smoke" data-provider-thread-count="1">
     <test name="Re-run" parallel="methods" thread-count="2">
         <classes>
-            <class name="tests.AlwaysTests">
+            <class name="tests.create.AlwaysTests">
                 <methods>
                     <exclude name="alwaysPass"/>
                     <exclude name="alwaysFail"/>
                 </methods>
             </class>
-            <class name="tests.SimpleMath">
+            <class name="tests.delete.SimpleMath">
                 <methods>
                     <exclude name="addition"/>
                     <exclude name="subtraction"/>

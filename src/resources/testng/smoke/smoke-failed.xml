@@ -3,7 +3,7 @@
 <suite name="Run Failed Smoke" data-provider-thread-count="1">
     <test name="Re-run" parallel="methods" thread-count="1">
         <classes>
-            <class name="tests.AlwaysTests">
+            <class name="tests.create.AlwaysTests">
                 <methods>
                     <include name="alwaysPass"></include>
                     <include name="alwaysFail"></include>

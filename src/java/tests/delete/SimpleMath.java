@@ -1,4 +1,4 @@
-package tests;
+package tests.delete;
 
 import io.qameta.allure.Feature;
 import org.testng.Assert;
