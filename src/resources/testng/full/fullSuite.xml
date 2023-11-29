@@ -16,9 +16,4 @@
             </class>
         </classes>
     </test>
-                        
-<!--     <suite-files>
-        <suite-file path="run1.xml"></suite-file>
-        <suite-file path="run2.xml"></suite-file>
-    </suite-files> -->
 </suite>
