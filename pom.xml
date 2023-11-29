@@ -156,7 +156,7 @@
                     <allure.results.directory>target/allure-results</allure.results.directory>
                 </systemPropertyVariables>
                 <suiteXmlFiles>
-                    <suiteXmlFile>src\main\resources\testng\full\${suiteXmlFile}</suiteXmlFile>
+                    <suiteXmlFile>src\resources\testng\full\${suiteXmlFile}</suiteXmlFile>
                 </suiteXmlFiles>
             </configuration>
             <dependencies>
