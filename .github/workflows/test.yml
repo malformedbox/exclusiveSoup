@@ -84,20 +84,12 @@ jobs:
       - name: Generate Allure Report
         id: allure
         if: always()
-        run: |
-              if mvn allure:report; then
-                echo "Allure report status: success"
-                echo "ALLURE_STATUS=success" >> $GITHUB_ENV
-              else
-                echo "Allure report status: failure"
-                echo "ALLURE_STATUS=failure" >> $GITHUB_ENV
-              fi
+        run: mvn allure:report; then
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        if: success()
-        uses: actions/checkout@v2
         continue-on-error: true
+        uses: actions/checkout@v2
         with:
           ref: gh-pages
           path: gh-pages
