@@ -10,18 +10,18 @@ on:
       alwaysPass:
         description: 'Always Pass'
         required: true
-        default: 'false' # Use 'false' as a string
-        type: string # Set the input type as a string
+        default: false
+        type: boolean
       alwaysFail:
         description: 'Always Fail'
         required: false
-        default: 'false'
-        type: string
+        default: false
+        type: boolean
       addition:
         description: 'Addition'
         required: true
-        default: 'false'
-        type: string
+        default: false
+        type: boolean
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
@@ -83,12 +83,13 @@ jobs:
 
       - name: Generate Allure Report
         if: always()
-        run: mvn allure:report
+        run: |
+          mvn allure:report && echo "::set-output name=status::success" || echo "::set-output name=status::failure"
+          echo "Allure report status: ${{ steps.allure.outputs.status }}"
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        # if: needs['Generate Allure Report'].outputs.status == 'success'
-        if: success()
+        if: needs['Generate Allure Report'].outputs.status == 'success'
         uses: actions/checkout@v2
         continue-on-error: true
         with:
@@ -97,7 +98,6 @@ jobs:
 
       # This is needed to add history to the report
       - name: Build Report
-        if: success()
         uses: simple-elf/allure-report-action@master
         with:
           allure_results: target/allure-results
@@ -106,7 +106,6 @@ jobs:
           keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
           
       - name: Deploy to Github Pages
-        if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
@@ -114,7 +113,6 @@ jobs:
           publish_dir: allure-history
           
       - name: Post the link to the report
-        if: success()
         uses: Sibz/github-status-action@v1
         with: 
             authToken: ${{secrets.GITHUB_TOKEN}}
