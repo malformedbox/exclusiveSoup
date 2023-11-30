@@ -85,15 +85,17 @@ jobs:
         id: allure
         if: always()
         run: |
-          if mvn allure:report; then
-            echo "::set-output name=status::success"
-          else
-            echo "::set-output name=status::failure"
-          fi
+              if mvn allure:report; then
+                echo "Allure report status: success"
+                echo "ALLURE_STATUS=success" >> $GITHUB_ENV
+              else
+                echo "Allure report status: failure"
+                echo "ALLURE_STATUS=failure" >> $GITHUB_ENV
+              fi
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        if: ${{ needs.allure.outputs.status == 'success' }}
+        if: env.ALLURE_STATUS == 'success'
         uses: actions/checkout@v2
         continue-on-error: true
         with:
