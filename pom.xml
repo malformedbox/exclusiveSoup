@@ -13,7 +13,7 @@
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteType>resources</suiteType>
-        <suiteXmlFile>fullSuite.xm</suiteXmlFile>
+        <suiteXmlFile>fullSuite.xml</suiteXmlFile>
         <domainRoot>malformedbox.github.io/exclusiveSoup</domainRoot>
         <browserName>chrome</browserName>
         <codebase>stable</codebase>
