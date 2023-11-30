@@ -85,8 +85,11 @@ jobs:
         id: allure
         if: always()
         run: |
-          mvn allure:report && echo "::set-output name=status::success" || echo "::set-output name=status::failure"
-          echo "Allure report status: ${{ steps.allure.outputs.status }}"
+          if mvn allure:report; then
+            echo "::set-output name=status::success"
+          else
+            echo "::set-output name=status::failure"
+          fi
 
       # This is needed to grab Allure history
       - name: Get Allure history
