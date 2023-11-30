@@ -95,7 +95,7 @@ jobs:
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        if: env.ALLURE_STATUS == 'success'
+        if: success()
         uses: actions/checkout@v2
         continue-on-error: true
         with:
