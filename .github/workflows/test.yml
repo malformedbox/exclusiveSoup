@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
     inputs:
       alwaysPass:
-        description: 'Always Pass'
         required: true
         default: false
         type: boolean
