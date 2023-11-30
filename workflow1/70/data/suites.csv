@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Nov 29 21:22:21 GMT 2023","Wed Nov 29 21:22:21 GMT 2023","34","Run Smoke","Re-run","tests.delete.SimpleMath","tests.delete.SimpleMath","addition","addition",""
