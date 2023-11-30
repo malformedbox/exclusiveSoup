@@ -82,6 +82,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Generate Allure Report
+        id: allure
         if: always()
         run: |
           mvn allure:report && echo "::set-output name=status::success" || echo "::set-output name=status::failure"
