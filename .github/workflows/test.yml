@@ -35,12 +35,12 @@ on:
           - "17"
           - "18"
           - "19"
-        test2:
-          type: choice
-          description: Test name 2
-          options:
-            - None
-            - alwaysPass
+      test2:
+        type: choice
+        description: Test name 2
+        options:
+          - None
+          - alwaysPass
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
