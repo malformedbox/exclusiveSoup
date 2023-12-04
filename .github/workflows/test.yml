@@ -15,32 +15,16 @@ on:
         type: choice
         description: Test name 1
         options:
+          - None
           - alwaysPass
           - alwaysFail
-          - None
-          - "3"
-          - "4"
-          - "5"
-          - "6"
-          - "7"
-          - "8"
-          - "9"
-          - "10"
-          - "11"
-          - "12"
-          - "13"
-          - "14"
-          - "15"
-          - "16"
-          - "17"
-          - "18"
-          - "19"
       test2:
         type: choice
         description: Test name 2
         options:
           - None
           - alwaysPass
+          - alwaysFail
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
@@ -67,21 +51,21 @@ jobs:
           map1=("alwaysPass" "alwaysFail" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
           map2=("alwaysPass" "alwaysFail" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
 
-          selected="${{ github.event.inputs.test1 }}"
-          if [[ " ${map1[*]} " == *" $selected "* ]]; then
-            sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
-            echo "Running $selected"
-          elif [[ "None" == *" $selected "* ]]; then
+          selected1="${{ github.event.inputs.test1 }}"
+          if [[ " ${map1[*]} " == *" $selected1 "* ]]; then
+            sed -i "s/exclude name=\"$selected1\"/include name=\"$selected1\"/g" src/resources/testng/full/fullSuite.xml
+            echo "Running test1: $selected1"
+          elif [[ "None" == *" $selected1 "* ]]; then
             echo "Did not select a test to run."
           else
             echo "Invalid option selected: $selected"
           fi
 
-          selected="${{ github.event.inputs.test1 }}"
-          if [[ " ${map2[*]} " == *" $selected "* ]]; then
-            sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
-            echo "Running $selected"
-          elif [[ "None" == *" $selected "* ]]; then
+          selected2="${{ github.event.inputs.test1 }}"
+          if [[ " ${map2[*]} " == *" $selected2 "* ]]; then
+            sed -i "s/exclude name=\"$selected2\"/include name=\"$selected2\"/g" src/resources/testng/full/fullSuite.xml
+            echo "Running test2: $selected2"
+          elif [[ *" $selected2 "* == "None" ]]; then
             echo "Did not select a test to run."
           else
             echo "Invalid option selected: $selected"
