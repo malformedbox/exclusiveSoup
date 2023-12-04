@@ -11,16 +11,6 @@ on:
         required: true
         default: false
         type: boolean
-      alwaysFail:
-        description: 'Always Fail'
-        required: false
-        default: false
-        type: boolean
-      addition:
-        description: 'Addition'
-        required: true
-        default: false
-        type: boolean
       test1:
         type: choice
         description: Test name 1
@@ -73,6 +63,8 @@ jobs:
           if [[ " ${map[*]} " == *" $selected "* ]]; then
             sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running $selected"
+          else if [[ "None" == *" $selected "* ]]; then
+            echo "Did not select a test to run."
           else
             echo "Invalid option selected: $selected"
           fi
