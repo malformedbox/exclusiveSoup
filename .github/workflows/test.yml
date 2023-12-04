@@ -36,8 +36,12 @@ jobs:
         run: |   
           map=("alwaysPass" "alwaysFail")
 
-          for input_var in "test1" "test2"; do
-            selected="${{ github.event.inputs[$input_var] }}"
+          declare -A inputs
+          inputs[test1]="${{ github.event.inputs.test1 }}"
+          inputs[test2]="${{ github.event.inputs.test2 }}"
+      
+          for input_var in test1 test2; do
+            selected="${inputs[$input_var]}"
             if [[ " ${map[*]} " == *" $selected "* ]]; then
               sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
               echo "Running $input_var: $selected"
