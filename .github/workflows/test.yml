@@ -96,7 +96,7 @@ jobs:
 
       - name: Generate Allure Report
         id: allureReport
-        if: always()
+        if: success() || always()
         run: mvn allure:report
 
       # This is needed to grab Allure history
@@ -109,7 +109,7 @@ jobs:
 
       # This is needed to add history to the report
       - name: Build Report
-        if: failure()
+        if: success() || always()
         uses: simple-elf/allure-report-action@master
         with:
           allure_results: target/allure-results
@@ -118,7 +118,7 @@ jobs:
           keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
           
       - name: Deploy to Github Pages
-        if: failure()
+        if: success() || always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
@@ -126,7 +126,7 @@ jobs:
           publish_dir: allure-history
           
       - name: Post the link to the report
-        if: failure()
+        if: success() || always()
         uses: Sibz/github-status-action@v1
         with: 
             authToken: ${{secrets.GITHUB_TOKEN}}
