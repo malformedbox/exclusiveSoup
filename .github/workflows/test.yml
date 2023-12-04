@@ -21,6 +21,13 @@ on:
           - None
           - alwaysPass
           - alwaysFail
+      test3:
+        type: choice
+        description: Test name 2
+        options:
+          - None
+          - alwaysPass
+          - alwaysFail
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
