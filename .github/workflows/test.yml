@@ -61,7 +61,7 @@ jobs:
             echo "Invalid option selected: $selected"
           fi
 
-          selected2="${{ github.event.inputs.test1 }}"
+          selected2="${{ github.event.inputs.test2 }}"
           if [[ " ${map2[*]} " == *" $selected2 "* ]]; then
             sed -i "s/exclude name=\"$selected2\"/include name=\"$selected2\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running test2: $selected2"
