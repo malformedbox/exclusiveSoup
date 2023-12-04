@@ -48,8 +48,8 @@ jobs:
 
       - name: Modify XML file
         run: |   
-          map1=("alwaysPass" "alwaysFail" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
-          map2=("alwaysPass" "alwaysFail" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
+          map1=("alwaysPass" "alwaysFail")
+          map2=("alwaysPass" "alwaysFail")
 
           selected1="${{ github.event.inputs.test1 }}"
           if [[ " ${map1[*]} " == *" $selected1 "* ]]; then
