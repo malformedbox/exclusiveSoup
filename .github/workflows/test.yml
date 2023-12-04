@@ -21,6 +21,12 @@ on:
         required: true
         default: false
         type: boolean
+      test1:
+        type: choice
+        description: Test name 1
+        options:
+          - alwaysPass
+          - alwaysFail
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
