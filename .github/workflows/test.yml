@@ -7,10 +7,6 @@ on:
       - completed
   workflow_dispatch:
     inputs:
-      # alwaysPass:
-      #   required: true
-      #   default: false
-      #   type: boolean
       test1:
         type: choice
         description: Test name 1
@@ -55,20 +51,20 @@ jobs:
           if [[ " ${map1[*]} " == *" $selected1 "* ]]; then
             sed -i "s/exclude name=\"$selected1\"/include name=\"$selected1\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running test1: $selected1"
-          elif [[ "None" == *" $selected1 "* ]]; then
+          elif [[ "$selected1" == "None" ]]; then
             echo "Did not select a test to run."
           else
-            echo "Invalid option selected: $selected"
+            echo "Invalid option selected: $selected1"
           fi
 
           selected2="${{ github.event.inputs.test2 }}"
           if [[ " ${map2[*]} " == *" $selected2 "* ]]; then
             sed -i "s/exclude name=\"$selected2\"/include name=\"$selected2\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running test2: $selected2"
-          elif [[ *" $selected2 "* == "None" ]]; then
+          elif [[ "$selected2" == "None" ]]; then
             echo "Did not select a test to run."
           else
-            echo "Invalid option selected: $selected"
+            echo "Invalid option selected: $selected2"
           fi
           
             # if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
