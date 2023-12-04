@@ -7,10 +7,10 @@ on:
       - completed
   workflow_dispatch:
     inputs:
-      alwaysPass:
-        required: true
-        default: false
-        type: boolean
+      # alwaysPass:
+      #   required: true
+      #   default: false
+      #   type: boolean
       test1:
         type: choice
         description: Test name 1
@@ -71,7 +71,7 @@ jobs:
           if [[ " ${map1[*]} " == *" $selected "* ]]; then
             sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running $selected"
-          else if [[ "None" == *" $selected "* ]]; then
+          elif [[ "None" == *" $selected "* ]]; then
             echo "Did not select a test to run."
           else
             echo "Invalid option selected: $selected"
@@ -81,7 +81,7 @@ jobs:
           if [[ " ${map2[*]} " == *" $selected "* ]]; then
             sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running $selected"
-          else if [[ "None" == *" $selected "* ]]; then
+          elif [[ "None" == *" $selected "* ]]; then
             echo "Did not select a test to run."
           else
             echo "Invalid option selected: $selected"
