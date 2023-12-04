@@ -31,24 +31,13 @@ jobs:
     steps:  
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      # # The passed XML is only modified in the input workflow, there is not an actual change/commit on the XML
-      # - name: Download modified XML
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: Full Suite XML
-      #     path: src/resources/testng/full/fullSuite.xml
-
-      # - name: List downloaded contents
-      #   run: ls -R src/resources/testng/full
 
       - name: Modify XML file
         run: |   
-          map1=("alwaysPass" "alwaysFail")
-          map2=("alwaysPass" "alwaysFail")
+          map=("alwaysPass" "alwaysFail")
 
           selected1="${{ github.event.inputs.test1 }}"
-          if [[ " ${map1[*]} " == *" $selected1 "* ]]; then
+          if [[ " ${map[*]} " == *" $selected1 "* ]]; then
             sed -i "s/exclude name=\"$selected1\"/include name=\"$selected1\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running test1: $selected1"
           elif [[ "$selected1" == "None" ]]; then
@@ -58,7 +47,7 @@ jobs:
           fi
 
           selected2="${{ github.event.inputs.test2 }}"
-          if [[ " ${map2[*]} " == *" $selected2 "* ]]; then
+          if [[ " ${map[*]} " == *" $selected2 "* ]]; then
             sed -i "s/exclude name=\"$selected2\"/include name=\"$selected2\"/g" src/resources/testng/full/fullSuite.xml
             echo "Running test2: $selected2"
           elif [[ "$selected2" == "None" ]]; then
@@ -67,20 +56,6 @@ jobs:
             echo "Invalid option selected: $selected2"
           fi
           
-            # if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
-            #   sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/testng/full/fullSuite.xml
-            #   echo "Running ${{ github.event.inputs.alwaysPass }}" 
-        
-            #   if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
-            #     sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/testng/full/fullSuite.xml
-            #     echo "Running ${{ github.event.inputs.alwaysFail }}" 
-            #   fi
-            # fi
-            
-            # if [ "${{ github.event.inputs.addition }}" = "true" ]; then
-            #     sed -i 's/exclude name="addition"/include name="addition"/g' src/resources/testng/full/fullSuite.xml
-            #     echo "Running ${{ github.event.inputs.addition }}" 
-            # fi
         shell: bash
 
       - name: Print test names that will be ran
