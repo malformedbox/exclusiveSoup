@@ -17,6 +17,7 @@ on:
         options:
           - alwaysPass
           - alwaysFail
+          - None
           - "3"
           - "4"
           - "5"
