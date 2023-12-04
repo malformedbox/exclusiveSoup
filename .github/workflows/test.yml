@@ -27,6 +27,13 @@ on:
         options:
           - alwaysPass
           - alwaysFail
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
 
 run-name: Test other folder - ${{ github.run_number}} - ${{ inputs.description }}
         
