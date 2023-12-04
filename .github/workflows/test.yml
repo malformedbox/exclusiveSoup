@@ -48,7 +48,7 @@ jobs:
           inputs[test2]="${{ github.event.inputs.test2 }}"
           inputs[test3]="${{ github.event.inputs.test3 }}"
       
-          for input_var in test1 test2; do
+          for input_var in test1 test2 test3; do
             selected="${inputs[$input_var]}"
             if [[ " ${map[*]} " == *" $selected "* ]]; then
               sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
