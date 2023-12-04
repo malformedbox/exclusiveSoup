@@ -67,20 +67,30 @@ jobs:
 
       - name: Modify XML file
         run: |   
-            if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
-              sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/testng/full/fullSuite.xml
-              echo "Running ${{ github.event.inputs.alwaysPass }}" 
+          map=("alwaysPass" "alwaysFail" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
+
+          selected="${{ github.event.inputs.test1 }}"
+          if [[ " ${map[*]} " == *" $selected "* ]]; then
+            sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
+            echo "Running $selected"
+          else
+            echo "Invalid option selected: $selected"
+          fi
+          
+            # if [ "${{ github.event.inputs.alwaysPass }}" = "true" ]; then
+            #   sed -i 's/exclude name="alwaysPass"/include name="alwaysPass"/g' src/resources/testng/full/fullSuite.xml
+            #   echo "Running ${{ github.event.inputs.alwaysPass }}" 
         
-              if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
-                sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/testng/full/fullSuite.xml
-                echo "Running ${{ github.event.inputs.alwaysFail }}" 
-              fi
-            fi
+            #   if [ "${{ github.event.inputs.alwaysFail }}" = "true" ]; then
+            #     sed -i 's/exclude name="alwaysFail"/include name="alwaysFail"/g' src/resources/testng/full/fullSuite.xml
+            #     echo "Running ${{ github.event.inputs.alwaysFail }}" 
+            #   fi
+            # fi
             
-            if [ "${{ github.event.inputs.addition }}" = "true" ]; then
-                sed -i 's/exclude name="addition"/include name="addition"/g' src/resources/testng/full/fullSuite.xml
-                echo "Running ${{ github.event.inputs.addition }}" 
-            fi
+            # if [ "${{ github.event.inputs.addition }}" = "true" ]; then
+            #     sed -i 's/exclude name="addition"/include name="addition"/g' src/resources/testng/full/fullSuite.xml
+            #     echo "Running ${{ github.event.inputs.addition }}" 
+            # fi
         shell: bash
 
       - name: Print test names that will be ran
