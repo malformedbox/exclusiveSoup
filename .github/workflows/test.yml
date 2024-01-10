@@ -33,7 +33,7 @@ on:
           - alwaysPass
           - alwaysFail
 
-run-name: ${{ github.run_id }} Test other folder - '#'${{ github.run_number}}. Inserted build number - ${{ inputs.buildNumber }}
+run-name: ${{ github.run_id }} Test other folder - #${{ github.run_number}}. Inserted build number - ${{ inputs.buildNumber }}
         
 jobs:
   build-and-deploy:
