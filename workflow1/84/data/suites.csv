@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Nov 30 18:24:37 GMT 2023","Thu Nov 30 18:24:37 GMT 2023","42","Run Smoke","Re-run","tests.create.AlwaysTests","tests.create.AlwaysTests","alwaysPass","alwaysPass",""
-"failed","Thu Nov 30 18:24:37 GMT 2023","Thu Nov 30 18:24:37 GMT 2023","44","Run Smoke","Re-run","tests.create.AlwaysTests","tests.create.AlwaysTests","alwaysFail","alwaysFail",""
