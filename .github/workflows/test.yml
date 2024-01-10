@@ -7,6 +7,10 @@ on:
       - completed
   workflow_dispatch:
     inputs:
+      buildNumber: 
+        description: Optional build number. May be left blank.
+        required: false
+        default: ''
       test1:
         type: choice
         description: Test name 1
@@ -29,7 +33,7 @@ on:
           - alwaysPass
           - alwaysFail
 
-run-name: ${{ github.run_id }} Test other folder - '#'${{ github.run_number}}
+run-name: ${{ github.run_id }} Test other folder - '#'${{ github.run_number}}. Inserted build number - ${{ inputs.buildNumber }}
         
 jobs:
   build-and-deploy:
