@@ -84,7 +84,6 @@ jobs:
         run: |
           echo "Inputs: ${{ toJson(inputs) }}"
           if [[ -z "${{ inputs.buildNumber }}" ]]; then
-            echo "Build number not provided"
             # Get the current date in mmddyyyy format
             date=$(date +'%m%d%Y')
             # Generate a random 5-digit number
@@ -92,6 +91,7 @@ jobs:
             # Combine the date and random number to create the build number
             buildNumber="${date}${random}"
             echo "Generated Build Number: ${{ buildNumber }}"
+            echo "::set-output name=buildNumber::${buildNumber}"
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
