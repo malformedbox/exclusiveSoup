@@ -89,9 +89,8 @@ jobs:
             # Generate a random 5-digit number
             random=$((1 + RANDOM % 99999))
             # Combine the date and random number to create the build number
-            buildNumber="${date}${random}"
-            echo "Generated Build Number: ${{ buildNumber }}"
-            echo "::set-output name=buildNumber::${buildNumber}"
+            echo "Generated Build Number: ${{ date }}${{ random }}"
+            echo "::set-output name=buildNumber::${date}${random}"
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
