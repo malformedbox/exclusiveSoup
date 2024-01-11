@@ -83,18 +83,18 @@ jobs:
         id: get-random-number
         run: |
           echo "Inputs: ${{ toJson(inputs) }}"
-          date=""
           if [[ -z "${{ inputs.buildNumber }}" ]]; then
             # Get the current date in mmddyyyy format
             date=$(date +'%m%d%Y')
             # Generate a random 5-digit number
             random=$((1 + RANDOM % 99999))
             # Combine the date and random number to create the build number
-            echo "Generated Build Number: ${{ date }}${{ random }}"
+            buildNumber="${date}${random}"
+            echo "Generated Build Number: ${{ buildNumber }}"
+            echo "::set-output name=buildNumber::${buildNumber}"
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
-          echo "::set-output name=buildNumber::${date}${random}"
 
       - name: Build with Maven
         run: |
