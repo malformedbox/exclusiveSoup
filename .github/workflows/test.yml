@@ -83,6 +83,7 @@ jobs:
         id: get-random-number
         run: |
           echo "Inputs: ${{ toJson(inputs) }}"
+          date=""
           if [[ -z "${{ inputs.buildNumber }}" ]]; then
             # Get the current date in mmddyyyy format
             date=$(date +'%m%d%Y')
@@ -93,6 +94,7 @@ jobs:
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
+          echo "::set-output name=buildNumber::${{ date }}${{ random }}"
 
       - name: Build with Maven
         run: |
