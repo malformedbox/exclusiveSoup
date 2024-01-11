@@ -82,7 +82,7 @@ jobs:
       - name: Generate build number
         id: get-random-number
         run: |
-          if [[ -n "${{ inputs.buildNumber }}" ]]; then
+          if [[ -z "${{ inputs.buildNumber }}" ]]; then
             # Get the current date in mmddyyyy format
             date=$(date +'%m%d%Y')
             # Generate a random 5-digit number
@@ -94,7 +94,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          if [ -n "${{ inputs.buildNumber }}" ]; then
+          if [ -z "${{ inputs.buildNumber }}" ]; then
             mvn -B package --file pom.xml -DbuildNumber=${{ inputs.buildNumber }}
           else
             mvn -B package --file pom.xml \
