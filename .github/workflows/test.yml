@@ -78,18 +78,18 @@ jobs:
         with:
           java-version: 8
           distribution: 'adopt'
-
+          
       - name: Generate build number
         id: get-random-number
         run: |
           if [[ -n "${{ inputs.buildNumber }}" ]]; then
             # Get the current date in mmddyyyy format
-            date=$(date + '%m%d%Y')
+            date=$(date +'%m%d%Y')
             # Generate a random 5-digit number
-            random=$((1 + RANDOM % 99999 ))
+            random=$((1 + RANDOM % 99999))
             # Combine the date and random number to create the build number
             buildNumber="${date}${random}"
-            echo "::set-output name=buildNumber::${{buildNumber}}"
+            echo "::set-output name=buildNumber::${buildNumber}"
           fi
 
       - name: Build with Maven
