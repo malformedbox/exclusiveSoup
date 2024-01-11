@@ -101,10 +101,11 @@ jobs:
       - name: Build with Maven
         run: |
           if [ -z "${{ inputs.buildNumber }}" ]; then
-            mvn -B package --file pom.xml -DbuildNumber=${{ inputs.buildNumber }}
-          else
             mvn -B package --file pom.xml \
               -DbuildNumber=${{ steps.get-random-number.outputs.buildNumber }}
+          else
+            mvn -B package --file pom.xml \
+              -DbuildNumber=${{ inputs.buildNumber }}
           fi
 
       - name: Generate Allure Report
