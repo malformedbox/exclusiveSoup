@@ -94,7 +94,7 @@ jobs:
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
-          echo "::set-output name=buildNumber::${{ date }}${{ random }}"
+          echo "::set-output name=buildNumber::${date}${random}"
 
       - name: Build with Maven
         run: |
