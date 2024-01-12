@@ -99,7 +99,6 @@ jobs:
         run: |
           if [ -z "${{ inputs.buildNumber }}" ]; then
             mvn -B package --file pom.xml \
-              echo "Build Number inserted to pom: " $GENERATED_BUILD_NUMBER
               -DbuildNumber=$GENERATED_BUILD_NUMBER
           else
             mvn -B package --file pom.xml \
