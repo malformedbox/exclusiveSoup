@@ -80,19 +80,19 @@ jobs:
           distribution: 'adopt'
           
       - name: Generate build number
-        # id: get-random-number
         run: |
+          echo "Inputs: ${{ toJson(inputs) }}"
           if [[ -z "${{ inputs.buildNumber }}" ]]; then
             # Get the current date in mmddyyyy format
             DATE=$(date +'%m%d%Y')
-            # echo "DATE=$DATE" >> $GITHUB_ENV
+            echo "DATE=$DATE" >> $GITHUB_ENV
             # Generate a random 5-digit number
             RANDOM_NUMBER=$((1 + RANDOM % 99999))
-            # echo "RANDOM_NUMBER=$RANDOM_NUMBER" >> $GITHUB_ENV
+            echo "RANDOM_NUMBER=$RANDOM_NUMBER" >> $GITHUB_ENV
             # Combine the date and random number to create the build number
-            "GENERATED_BUILD_NUMBER=$GENERATED_BUILD_NUMBER" >> $GITHUB_ENV
-            GENERATED_BUILD_NUMBER="$DATE$RANDOM_NUMBER" 
+            GENERATED_BUILD_NUMBER="$DATE$RANDOM_NUMBER"
             echo "Generated Build Number: $GENERATED_BUILD_NUMBER"
+            echo "GENERATED_BUILD_NUMBER=$GENERATED_BUILD_NUMBER" >> $GITHUB_ENV
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
