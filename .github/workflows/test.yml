@@ -81,7 +81,6 @@ jobs:
           
       - name: Generate build number
         run: |
-          echo "Inputs: ${{ toJson(inputs) }}"
           if [[ -z "${{ inputs.buildNumber }}" ]]; then
             # Get the current date in mmddyyyy format
             DATE=$(date +'%m%d%Y')
