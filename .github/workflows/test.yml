@@ -89,6 +89,8 @@ jobs:
             # Combine the date and random number to create the build number
             GENERATED_BUILD_NUMBER="$DATE$RANDOM_NUMBER"
             echo "Generated Build Number: $GENERATED_BUILD_NUMBER"
+            # This line is necessary for use outside of this step
+            echo "GENERATED_BUILD_NUMBER=$GENERATED_BUILD_NUMBER" >> $GITHUB_ENV
           else
             echo "Build number provided: ${{ inputs.buildNumber }}"
           fi
