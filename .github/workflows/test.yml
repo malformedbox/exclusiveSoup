@@ -112,7 +112,7 @@ jobs:
 
       # This is needed to grab Allure history
       - name: Get Allure history
-        if: failure()
+        if: success() || always()
         uses: actions/checkout@v2
         with:
           ref: gh-pages
