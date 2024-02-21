@@ -4,10 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       skipDelay:
-        type: boolean
+        type: choice
         description: 'Skip the delay at beginning of build?'
-        default: true
-        required: false
+        options:
+          - 'True'
+          - 'False'
       buildNumber: 
         description: Optional build number. May be left blank.
         required: false
@@ -41,15 +42,15 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:  
-      # - name: Check if delay should be skipped
-      #   id: check-skip
-      #   run: |
-      #     if ${{ github.event.inputs.skipDelay }} ; then
-      #       echo "Delay step will be skipped"
-      #       echo "::set-output name=skipDelay::true"
-      #     else
-      #       echo "::set-output name=skipDelay::false"
-      #     fi
+      - name: Check if delay should be skipped
+        id: check-skip
+        run: |
+          if ${{ github.event.inputs.skipDelay }} ; then
+            echo "Delay step will be skipped"
+            echo "::set-output name=skipDelay::true"
+          else
+            echo "::set-output name=skipDelay::false"
+          fi
       - name: Delay for 5 minutes
         if: steps.check-skip.outputs.skipDelay == false
         run: sleep 50
