@@ -49,7 +49,7 @@ jobs:
           if [[ "${{ github.event.inputs.action }}" == "Skip" ]]; then
             echo "Skipping the build."
             exit 0
-          elif [[ "${{ github.event.inputs.action }}" == "Don't Skip" ]]; then
+          elif [[ "${{ github.event.inputs.action }}" == "Keep the delay" ]]; then
             echo "Proceeding with the build."
             # Add any additional steps needed before "Delay build"
           else
