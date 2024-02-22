@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       skipDelay:
+        type: choice
         description: 'Skip the delay at beginning of build?'
         required: false
         default: 'Skip'
