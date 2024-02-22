@@ -59,7 +59,7 @@ jobs:
         shell: bash
         
       - name: Delay for 5 minutes
-        if: ${{ github.event.inputs.skipDelay }} != 'Skip'
+        if: ${{ github.event.inputs.skipDelay != 'Skip' }}
         run: sleep 50
         
       # - name: Checkout code
