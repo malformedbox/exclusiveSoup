@@ -46,10 +46,10 @@ jobs:
     steps:  
       - name: Check if delay should be skipped
         run: |
-          if [[ "${{ github.event.inputs.action }}" == "Skip" ]]; then
+          if [[ "${{ github.event.inputs.skipDelay }}" == "Skip" ]]; then
             echo "Skipping the build."
             exit 0
-          elif [[ "${{ github.event.inputs.action }}" == "Keep the delay" ]]; then
+          elif [[ "${{ github.event.inputs.skipDelay }}" == "Keep the delay" ]]; then
             echo "Proceeding with the build."
             # Add any additional steps needed before "Delay build"
           else
