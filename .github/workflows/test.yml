@@ -8,9 +8,6 @@ on:
         description: 'Skip the delay at beginning of build?'
         required: false
         default: true
-        # options: 
-        #   - Skip
-        #   - Keep the delay
       buildNumber: 
         description: Optional build number. May be left blank.
         required: false
@@ -42,6 +39,9 @@ run-name: '${{ github.run_id }} Test other folder - #${{ github.run_number}}. In
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      VALUE: ${{ secrets.TESTVALUE }}
       
     steps:        
       - name: Check if delay should be skipped
@@ -52,8 +52,8 @@ jobs:
         if: ${{ github.event.inputs.skipDelay == 'false' }}
         run: sleep 50
         
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       # - name: Modify XML file
       #   run: |   

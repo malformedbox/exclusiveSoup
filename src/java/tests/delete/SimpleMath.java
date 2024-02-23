@@ -25,4 +25,12 @@ public class SimpleMath {
         basicPages.printOutAssert("Difference is: " + difference);
         Assert.assertEquals(5, 4, difference);
     }
+
+    @Test
+    @Feature("Comparing secret value")
+    public void testValue() {
+        String testValue = System.getenv("TESTVALUE");
+        basicPages.printOutAssert("Comparing the values: " + testValue);
+        Assert.assertEquals(testValue, "abc123");
+    }
 }
