@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       skipDelay:
-        type: choice
+        type: boolean
         description: 'Skip the delay at beginning of build?'
         required: false
-        default: 'Skip'
-        options: 
-          - Skip
-          - Keep the delay
+        default: true
+        # options: 
+        #   - Skip
+        #   - Keep the delay
       buildNumber: 
         description: Optional build number. May be left blank.
         required: false
@@ -46,10 +46,10 @@ jobs:
     steps:  
       - name: Check if delay should be skipped
         run: |
-          if [[ "${{ github.event.inputs.skipDelay }}" == "Skip" ]]; then
+          if [[ "${{ github.event.inputs.skipDelay }}" == true ]]; then
             echo "Skipping the build."
             exit 0
-          elif [[ "${{ github.event.inputs.skipDelay }}" == "Keep the delay" ]]; then
+          elif [[ "${{ github.event.inputs.skipDelay }}" == false ]]; then
             echo "Proceeding with the build."
             # Add any additional steps needed before "Delay build"
           else
@@ -59,7 +59,7 @@ jobs:
         shell: bash
         
       - name: Delay for 5 minutes
-        if: ${{ github.event.inputs.skipDelay != 'Skip' }}
+        if: ${{ github.event.inputs.skipDelay != true }}
         run: sleep 50
         
       # - name: Checkout code
