@@ -43,20 +43,17 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
       
-    steps:  
+    steps: 
+      - name: Set delay flag
+        id: set_delay_flag
+        run: echo "::set-output name=skipDelay::${{ github.event.inputs.skipDelay == true }}"
+        
       - name: Check if delay should be skipped
-        run: |
-          if [[ "${{ github.event.inputs.skipDelay }}" == true ]]; then
-            echo "Skipping the build."
-            echo "::set-output name=skipDelay::true"
-          else
-            echo "Proceeding with delay."
-            echo "::set-output name=skipDelay::false"
-          fi
-        shell: bash
+        if: ${{ steps.set_delay_flag.outputs.skipDelay == 'false' }}
+        run: echo "Skipping the build."
         
       - name: Delay for 5 minutes
-        if: steps.check_skip_delay_outputs.skipDelay == 'false'
+        if: ${{ steps.set_delay_flag.outputs.skipDelay == 'true' }}
         run: sleep 50
         
       # - name: Checkout code
