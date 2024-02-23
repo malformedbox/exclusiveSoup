@@ -29,7 +29,7 @@ public class SimpleMath {
     @Test
     @Feature("Comparing secret value")
     public void testValue() {
-        String testValue = System.getenv("TESTVALUE");
+        String testValue = System.getenv("TESTSECRET");
         basicPages.printOutAssert("Comparing the values: " + testValue);
         Assert.assertEquals(testValue, "abc123");
     }
