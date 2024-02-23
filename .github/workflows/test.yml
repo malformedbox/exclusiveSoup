@@ -19,6 +19,7 @@ on:
           - None
           - alwaysPass
           - alwaysFail
+          - testValue
       test2:
         type: choice
         description: Test name 2
@@ -57,7 +58,7 @@ jobs:
 
       - name: Modify XML file
         run: |   
-          map=("alwaysPass" "alwaysFail")
+          map=("alwaysPass" "alwaysFail" "testValue")
 
           declare -A inputs
           inputs[test1]="${{ github.event.inputs.test1 }}"
