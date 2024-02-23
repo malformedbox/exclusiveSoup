@@ -56,7 +56,7 @@ jobs:
         shell: bash
         
       - name: Delay for 5 minutes
-        if: steps.check_skip_delay_outputs.skipDelay = 'false'
+        if: steps.check_skip_delay_outputs.skipDelay == 'false'
         run: sleep 50
         
       # - name: Checkout code
