@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VALUE: ${{ secrets.TESTVALUE }}
+      VALUE: ${{ secrets.TESTSECRET }}
       
     steps:        
       - name: Check if delay should be skipped
