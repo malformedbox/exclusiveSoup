@@ -55,110 +55,110 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Modify XML file
-      #   run: |   
-      #     map=("alwaysPass" "alwaysFail")
+      - name: Modify XML file
+        run: |   
+          map=("alwaysPass" "alwaysFail")
 
-      #     declare -A inputs
-      #     inputs[test1]="${{ github.event.inputs.test1 }}"
-      #     inputs[test2]="${{ github.event.inputs.test2 }}"
-      #     inputs[test3]="${{ github.event.inputs.test3 }}"
+          declare -A inputs
+          inputs[test1]="${{ github.event.inputs.test1 }}"
+          inputs[test2]="${{ github.event.inputs.test2 }}"
+          inputs[test3]="${{ github.event.inputs.test3 }}"
       
-      #     for input_var in test1 test2 test3; do
-      #       selected="${inputs[$input_var]}"
-      #       if [[ " ${map[*]} " == *" $selected "* ]]; then
-      #         sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
-      #         echo "Running $input_var: $selected"
-      #       elif [[ "$selected" == "None" ]]; then
-      #         echo "Did not select a test to run."
-      #       else
-      #         echo "Invalid option selected: $selected"
-      #       fi
-      #     done
+          for input_var in test1 test2 test3; do
+            selected="${inputs[$input_var]}"
+            if [[ " ${map[*]} " == *" $selected "* ]]; then
+              sed -i "s/exclude name=\"$selected\"/include name=\"$selected\"/g" src/resources/testng/full/fullSuite.xml
+              echo "Running $input_var: $selected"
+            elif [[ "$selected" == "None" ]]; then
+              echo "Did not select a test to run."
+            else
+              echo "Invalid option selected: $selected"
+            fi
+          done
           
-      #   shell: bash
+        shell: bash
 
-      # - name: Print test names that will be ran
-      #   run: cat src/resources/testng/full/fullSuite.xml
+      - name: Print test names that will be ran
+        run: cat src/resources/testng/full/fullSuite.xml
 
-      # - name: Cache Maven dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/.m2/repository
-      #     key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-maven-
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
-      # - name: Set up JDK 8
-      #   uses: actions/setup-java@v2
-      #   with:
-      #     java-version: 8
-      #     distribution: 'adopt'
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
           
-      # - name: Generate build number
-      #   run: |
-      #     if [[ -z "${{ inputs.buildNumber }}" ]]; then
-      #       # Get the current date in mmddyyyy format
-      #       DATE=$(date +'%m%d%Y')
-      #       # Generate a random 5-digit number
-      #       RANDOM_NUMBER=$((1 + RANDOM % 99999))
-      #       # Combine the date and random number to create the build number
-      #       GENERATED_BUILD_NUMBER="$DATE$RANDOM_NUMBER"
-      #       echo "Generated Build Number: $GENERATED_BUILD_NUMBER"
-      #       # This line is necessary for use outside of this step
-      #       echo "GENERATED_BUILD_NUMBER=$GENERATED_BUILD_NUMBER" >> $GITHUB_ENV
-      #     else
-      #       echo "Build number provided: ${{ inputs.buildNumber }}"
-      #     fi
+      - name: Generate build number
+        run: |
+          if [[ -z "${{ inputs.buildNumber }}" ]]; then
+            # Get the current date in mmddyyyy format
+            DATE=$(date +'%m%d%Y')
+            # Generate a random 5-digit number
+            RANDOM_NUMBER=$((1 + RANDOM % 99999))
+            # Combine the date and random number to create the build number
+            GENERATED_BUILD_NUMBER="$DATE$RANDOM_NUMBER"
+            echo "Generated Build Number: $GENERATED_BUILD_NUMBER"
+            # This line is necessary for use outside of this step
+            echo "GENERATED_BUILD_NUMBER=$GENERATED_BUILD_NUMBER" >> $GITHUB_ENV
+          else
+            echo "Build number provided: ${{ inputs.buildNumber }}"
+          fi
 
-      # - name: Build with Maven
-      #   run: |
-      #     if [ -z "${{ inputs.buildNumber }}" ]; then
-      #       mvn -B package --file pom.xml \
-      #         -DbuildNumber=$GENERATED_BUILD_NUMBER
-      #     else
-      #       mvn -B package --file pom.xml \
-      #         -DbuildNumber=${{ inputs.buildNumber }}
-      #     fi
+      - name: Build with Maven
+        run: |
+          if [ -z "${{ inputs.buildNumber }}" ]; then
+            mvn -B package --file pom.xml \
+              -DbuildNumber=$GENERATED_BUILD_NUMBER
+          else
+            mvn -B package --file pom.xml \
+              -DbuildNumber=${{ inputs.buildNumber }}
+          fi
 
-      # - name: Generate Allure Report
-      #   id: allureReport
-      #   if: success() || always()
-      #   run: mvn allure:report
+      - name: Generate Allure Report
+        id: allureReport
+        if: success() || always()
+        run: mvn allure:report
 
-      # # This is needed to grab Allure history
-      # - name: Get Allure history
-      #   if: success() || always()
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: gh-pages
-      #     path: gh-pages
+      # This is needed to grab Allure history
+      - name: Get Allure history
+        if: success() || always()
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: gh-pages
 
-      # # This is needed to add history to the report
-      # - name: Build Report
-      #   if: success() || always()
-      #   uses: simple-elf/allure-report-action@master
-      #   with:
-      #     allure_results: target/allure-results
-      #     allure_history: allure-history
-      #     subfolder: workflow1
-      #     keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
+      # This is needed to add history to the report
+      - name: Build Report
+        if: success() || always()
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: target/allure-results
+          allure_history: allure-history
+          subfolder: workflow1
+          keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
           
-      # - name: Deploy to Github Pages
-      #   if: success() || always()
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     personal_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_branch: gh-pages
-      #     publish_dir: allure-history
+      - name: Deploy to Github Pages
+        if: success() || always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
           
-      # - name: Post the link to the report
-      #   if: success() || always()
-      #   uses: Sibz/github-status-action@v1
-      #   with: 
-      #       authToken: ${{secrets.GITHUB_TOKEN}}
-      #       context: 'Test report'
-      #       state: 'success'
-      #       sha: ${{ github.event.pull_request.head.sha || github.sha }}
-      #       # Must be in https scheme and must match the subfolder's value in Build Report step
-      #       target_url: https://malformedbox.github.io/exclusiveSoup/workflow1/${{ github.run_number}}
+      - name: Post the link to the report
+        if: success() || always()
+        uses: Sibz/github-status-action@v1
+        with: 
+            authToken: ${{secrets.GITHUB_TOKEN}}
+            context: 'Test report'
+            state: 'success'
+            sha: ${{ github.event.pull_request.head.sha || github.sha }}
+            # Must be in https scheme and must match the subfolder's value in Build Report step
+            target_url: https://malformedbox.github.io/exclusiveSoup/workflow1/${{ github.run_number}}
