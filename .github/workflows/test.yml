@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Debug value
         run: |
-          echo "value is: $TESTSECRET"
+          echo "value is: VALUE"
 #      - name: Check if delay should be skipped
 #        if: ${{ github.event.inputs.skipDelay == 'true' }}
 #        run: echo "Skipping the build."
