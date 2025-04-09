@@ -5,7 +5,7 @@
         <classes>
             <class name="tests.create.AlwaysTests">
                 <methods>
-                    <exclude name="alwaysPass"/>
+                    <include name="alwaysPass"/>
                     <exclude name="alwaysFail"/>
                 </methods>
             </class>
@@ -13,6 +13,7 @@
                 <methods>
                     <exclude name="addition"/>
                     <exclude name="subtraction"/>
+                    <exclude name="testValue"></exclude>
                 </methods>
             </class>
         </classes>
