@@ -9,41 +9,45 @@ on:
 
 jobs:
   run-tests:
-    - name: 'Browserstack Env Setup'
-      uses: browserstack/github-actions/setup-env@master
-      with:
-        username: ${{ secrets.BSUSERNAME }}
-        access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Browserstack Env Setup'
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username: ${{ secrets.BSUSERNAME }}
+          access-key: ${{ secrets.BSACCESSKEY }}
+          build-name: nightlyautomation123
+          project-name: malformedbox/exclusiveSoup
 
-    - name: 'Browserstack Local Tunnel Setup'
-      uses: browserstack/github-actions/setup-local@master
-      with:
-        local-testing: start
-        local-identifier: random
+      - name: 'Browserstack Local Tunnel Setup'
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+          local-identifier: random
 
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        repository: malformedbox/exclusiveSoup
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: malformedbox/exclusiveSoup
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 'Building web application to be tested'
-      run: mvn clean install
+      - name: 'Building web application to be tested'
+        run: mvn clean install
 
-    - name: 'Running application under test'
-      run: |
-        mvn -B package --file pom.xml \
-        -DsuiteType=full \
-        -DsuiteXmlFile="fullSuite.xml" \
-        -DdomainRoot=nightlyautomation \
-        -Dcodebase=PROD \
-        -DbuildNumber=123
-        -Dtestplatform=BS \
-        -DrunMode=PROD \
-        -DbsUsername=${{ secrets.BSUSERNAME }} \
-        -DbsAccessKey=${{ secrets.BSACCESSKEY }}
+      - name: 'Running application under test'
+        run: |
+          mvn -B package --file pom.xml \
+          -DsuiteType=full \
+          -DsuiteXmlFile="fullSuite.xml" \
+          -DdomainRoot=nightlyautomation \
+          -Dcodebase=PROD \
+          -DbuildNumber=123
+          -Dtestplatform=BS \
+          -DrunMode=PROD \
+          -DbsUsername=${{ secrets.BSUSERNAME }} \
+          -DbsAccessKey=${{ secrets.BSACCESSKEY }}
 
-    - name: 'Browserstack local stop'
-      uses: browserstack/github-actions/setup-local@master
-      with:
-        local-testing: stop
+      - name: 'Browserstack local stop'
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
