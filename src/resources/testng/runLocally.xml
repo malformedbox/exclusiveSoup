@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Run Suite" data-provider-thread-count="1">
+    <parameter name="suiteType" value="full"></parameter>
     <test name="Run Tests" parallel="methods" thread-count="5">
         <classes>
             <class name="tests.delete.SimpleMath">
                 <methods>
-                    <include name="validateChatBotResponse"/>
+                    <include name="addition"/>
                 </methods>
             </class>
         </classes>

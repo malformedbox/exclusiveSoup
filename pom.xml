@@ -146,6 +146,7 @@
             <configuration>
                 <testFailureIgnore>false</testFailureIgnore>
                 <argLine>
+                    -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                     -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                 </argLine>
                 <properties>
@@ -161,13 +162,14 @@
                     <buildNumber>${buildNumber}</buildNumber>
                     <domainRoot>${domainRoot}</domainRoot>
                     <testPlatform>${testPlatform}</testPlatform>
-
                     <runMode>${runMode}</runMode>
+                    <bsUsername>${bsUsername}</bsUsername>
+                    <bsAccessKey>${bsAccessKey}</bsAccessKey>
                     <huggingFaceApi>${huggingFaceApi}</huggingFaceApi>
                     <allure.results.directory>target/allure-results</allure.results.directory>
                 </systemPropertyVariables>
                 <suiteXmlFiles>
-                    <suiteXmlFile>src\resources\testng\full\${suiteXmlFile}</suiteXmlFile>
+                    <suiteXmlFile>src\resources\testng\${suiteType}\${suiteXmlFile}</suiteXmlFile>
                 </suiteXmlFiles>
             </configuration>
             <dependencies>
