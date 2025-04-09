@@ -41,7 +41,7 @@ jobs:
           -DsuiteXmlFile="fullSuite.xml" \
           -DdomainRoot=nightlyautomation \
           -Dcodebase=PROD \
-          -DbuildNumber=123
+          -DbuildNumber=123 \
           -DtestPlatform=BS \
           -DrunMode=PROD \
           -DbsUsername=${{ secrets.BSUSERNAME }} \
