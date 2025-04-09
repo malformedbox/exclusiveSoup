@@ -21,6 +21,9 @@
         <buildNumber>abc</buildNumber>
         <testPlatform>BS</testPlatform>
         <runMode>VAN</runMode>
+        <bsUsername></bsUsername>
+        <bsAccessKey></bsAccessKey>
+        <huggingFaceApi></huggingFaceApi>
         <aspectj.version>1.9.20.1</aspectj.version>
     </properties>
 
@@ -99,6 +102,12 @@
             <version>2.23.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.browserstack</groupId>
+            <artifactId>browserstack-java-sdk</artifactId>
+            <version>1.30.8</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -154,6 +163,7 @@
                     <testPlatform>${testPlatform}</testPlatform>
 
                     <runMode>${runMode}</runMode>
+                    <huggingFaceApi>${huggingFaceApi}</huggingFaceApi>
                     <allure.results.directory>target/allure-results</allure.results.directory>
                 </systemPropertyVariables>
                 <suiteXmlFiles>
