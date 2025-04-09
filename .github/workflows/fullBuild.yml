@@ -42,7 +42,7 @@ jobs:
           -DdomainRoot=nightlyautomation \
           -Dcodebase=PROD \
           -DbuildNumber=123
-          -Dtestplatform=BS \
+          -DtestPlatform=BS \
           -DrunMode=PROD \
           -DbsUsername=${{ secrets.BSUSERNAME }} \
           -DbsAccessKey=${{ secrets.BSACCESSKEY }}
