@@ -159,6 +159,7 @@
                     <codebase>${codebase}</codebase>
                     <browserName>${browserName}</browserName>
                     <acCodebase>${acCodebase}</acCodebase>
+                    <suiteType>${suiteType}</suiteType>
                     <buildNumber>${buildNumber}</buildNumber>
                     <domainRoot>${domainRoot}</domainRoot>
                     <testPlatform>${testPlatform}</testPlatform>
