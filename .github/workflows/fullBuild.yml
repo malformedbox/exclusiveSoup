@@ -1,92 +1,49 @@
 name: Full Build
-
 on:
   workflow_dispatch:
-  workflow_call:
     inputs:
-      triggeringComment:
+      buildNumber:
+        description: Insert build number.
         required: false
-        default: stable
-        type: string
-        
-  pull_request:
-    branches:
-      - main
+        default: ""
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+  run-tests:
+    - name: 'Browserstack Env Setup'
+      uses: browserstack/github-actions/setup-env@master
+      with:
+        username: ${{ secrets.BSUSERNAME }}
+        access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: 'Browserstack Local Tunnel Setup'
+      uses: browserstack/github-actions/setup-local@master
+      with:
+        local-testing: start
+        local-identifier: random
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        repository: malformedbox/exclusiveSoup
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up JDK 8
-        uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
+    - name: 'Building web application to be tested'
+      run: mvn clean install
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+    - name: 'Running application under test'
+      run: |
+        mvn -B package --file pom.xml \
+        -DsuiteType=full \
+        -DsuiteXmlFile="fullSuite.xml" \
+        -DdomainRoot=nightlyautomation \
+        -Dcodebase=PROD \
+        -DbuildNumber=123
+        -Dtestplatform=BS \
+        -DrunMode=PROD \
+        -DbsUsername=${{ secrets.BSUSERNAME }} \
+        -DbsAccessKey=${{ secrets.BSACCESSKEY }}
 
-      - name: Generate Allure Report
-        if: always()
-        run: mvn allure:report
-
-      # This is needed to grab Allure history
-      - name: Get Allure history
-        if: always()
-        uses: actions/checkout@v2
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      # This is needed to add history to the report
-      - name: Build Report
-        if: always()
-        uses: simple-elf/allure-report-action@master
-        with:
-          allure_results: target/allure-results
-          allure_history: allure-history
-          #possibly cannot incorporate a capital letter, so anotherOne did not work, numbers work
-          subfolder: anotherOne
-          keep_reports: 10 # Keeps only 10 previous history, oldest gets deleted
-
-      # - name: Get current date
-      #   if: always()
-      #   run: |
-      #     export TZ="America/New_York"
-      #     current_date=$(date +'%Y-%m-%d-%H:%M:%S')
-      #     echo "Current Date: $current_date"
-      #     mkdir -p "$GITHUB_WORKSPACE/$current_date" # Use $GITHUB_WORKSPACE to reference the workspace
-      #     cp -r "$GITHUB_WORKSPACE/allure-history" "$GITHUB_WORKSPACE/$current_date" # Reference allure-history with $GITHUB_WORKSPACE
-
-      - name: Deploy to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          # publish_dir: allure-history
-          publish_dir: allure-history
-          
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with: 
-            authToken: ${{secrets.GITHUB_TOKEN}}
-            context: 'Test report'
-            state: 'success'
-            sha: ${{ github.event.pull_request.head.sha || github.sha }}
-            # Must be in https scheme
-            target_url: https://malformedbox.github.io/exclusiveSoup/anotherOne/${{ github.run_number}}
+    - name: 'Browserstack local stop'
+      uses: browserstack/github-actions/setup-local@master
+      with:
+        local-testing: stop
